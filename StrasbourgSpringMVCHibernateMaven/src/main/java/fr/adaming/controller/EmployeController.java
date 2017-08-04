@@ -28,10 +28,8 @@ public class EmployeController {
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String welcomeEmploye(ModelMap model) {
-
 		model.addAttribute("name", "APPLICATION DE GESTION DES EMPLOYES");
 		model.addAttribute("salutation", "Avec Spring MVC @Author BOUMALLOUGA Mohamed");
-
 		return "home";
 	}
 
@@ -50,13 +48,11 @@ public class EmployeController {
 
 	@RequestMapping(value = "/insererEmploye", method = RequestMethod.POST)
 	public String insererEmploye(@ModelAttribute("employe") Employe pEmploye, ModelMap model) {
-
 		if (pEmploye.getId() == 0) {
 			employeService.addEmploye(pEmploye);
 		} else {
 			employeService.updateEmploye(pEmploye);
 		}
-
 		model.addAttribute("employeeList", employeService.getAllEmployes());
 		return "employes";
 	}
@@ -66,8 +62,7 @@ public class EmployeController {
 		Employe empl = employeService.getEmployeById(IdEmploye);
 		employeService.deleteEmploye(empl);
 		model.addAttribute("employeeList", employeService.getAllEmployes());
-
-		return "employes";
+		return "redirect:/employe/listemployes";
 	}
 
 	@RequestMapping(value = "/editEmploye", method = RequestMethod.GET)
